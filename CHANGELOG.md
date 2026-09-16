@@ -1,9 +1,10 @@
 # Changelog
 
-## 0.2.0-SNAPSHOT
+## 0.2.0
 
 - Added Maven Guardian lifecycle integration.
-- Standardized Maven artifact coordinates on the product namespace `io.linkagelens` instead of a maintainer-specific namespace.
+- Standardized Maven artifact coordinates on the product namespace `io.linkagelens`.
+- Added Maven Central release metadata, sources, Javadocs, GPG signing, and Central Portal publishing support.
 
 ## 0.1.0
 

@@ -1,6 +1,54 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion><groupId>io.linkagelens</groupId><artifactId>linkagelens-maven-extension</artifactId><version>0.2.0-SNAPSHOT</version><name>LinkageLens Maven Extension</name><description>Automatically injects LinkageLens into Maven verify.</description>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>io.linkagelens</groupId>
+  <artifactId>linkagelens-maven-extension</artifactId>
+  <version>0.2.0</version>
+  <name>LinkageLens Maven Extension</name>
+  <description>Automatically injects LinkageLens binary-linkage checks into Maven verify.</description>
+  <url>https://github.com/Shashank022/linkagelens</url>
+
+  <licenses>
+    <license><name>MIT License</name><url>https://opensource.org/licenses/MIT</url><distribution>repo</distribution></license>
+  </licenses>
+  <developers>
+    <developer>
+      <name>LinkageLens Contributors</name>
+      <organization>LinkageLens</organization>
+      <organizationUrl>https://github.com/Shashank022/linkagelens</organizationUrl>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:https://github.com/Shashank022/linkagelens.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/Shashank022/linkagelens.git</developerConnection>
+    <url>https://github.com/Shashank022/linkagelens</url>
+    <tag>HEAD</tag>
+  </scm>
+
   <properties><maven.compiler.release>17</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>
   <dependencies><dependency><groupId>org.apache.maven</groupId><artifactId>maven-core</artifactId><version>3.9.11</version><scope>provided</scope></dependency></dependencies>
   <build><plugins><plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version></plugin></plugins></build>
+
+  <profiles>
+    <profile>
+      <id>central-release</id>
+      <build><plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId><artifactId>maven-source-plugin</artifactId><version>3.3.1</version>
+          <executions><execution><id>attach-sources</id><goals><goal>jar-no-fork</goal></goals></execution></executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId><artifactId>maven-javadoc-plugin</artifactId><version>3.11.2</version>
+          <executions><execution><id>attach-javadocs</id><goals><goal>jar</goal></goals></execution></executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId><artifactId>maven-gpg-plugin</artifactId><version>3.2.8</version>
+          <executions><execution><id>sign-artifacts</id><phase>verify</phase><goals><goal>sign</goal></goals></execution></executions>
+        </plugin>
+        <plugin>
+          <groupId>org.sonatype.central</groupId><artifactId>central-publishing-maven-plugin</artifactId><version>0.11.0</version><extensions>true</extensions>
+          <configuration><publishingServerId>central</publishingServerId><autoPublish>true</autoPublish><waitUntil>published</waitUntil></configuration>
+        </plugin>
+      </plugins></build>
+    </profile>
+  </profiles>
 </project>
