@@ -8,7 +8,7 @@ import org.apache.maven.model.PluginExecution;
 import org.apache.maven.project.MavenProject;
 
 public final class LinkageLensLifecycleParticipant extends AbstractMavenLifecycleParticipant {
-    private static final String GROUP_ID = "io.github.shashank022";
+    private static final String GROUP_ID = "io.linkagelens";
     private static final String ARTIFACT_ID = "linkagelens-maven-plugin";
     private static final String VERSION = "0.2.0-SNAPSHOT";
 

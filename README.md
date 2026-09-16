@@ -15,6 +15,16 @@ java.lang.UnsupportedClassVersionError
 
 LinkageLens analyzes JVM bytecode directly so it can compare **what compiled code references** with **what the runtime classpath actually provides**.
 
+## Maven coordinates
+
+LinkageLens uses the product-owned Maven namespace:
+
+```text
+io.linkagelens
+```
+
+Consumer-facing artifacts do not use a maintainer username in their Maven coordinates.
+
 ## Quick start — CLI
 
 Requirements: Java 17+.
@@ -62,7 +72,7 @@ After the LinkageLens Maven artifacts are installed/published, add this once to 
 ```xml
 <extensions>
   <extension>
-    <groupId>io.github.shashank022</groupId>
+    <groupId>io.linkagelens</groupId>
     <artifactId>linkagelens-maven-extension</artifactId>
     <version>0.2.0-SNAPSHOT</version>
   </extension>
@@ -83,7 +93,7 @@ Teams that prefer explicit POM configuration can bind the Maven plugin directly:
 
 ```xml
 <plugin>
-  <groupId>io.github.shashank022</groupId>
+  <groupId>io.linkagelens</groupId>
   <artifactId>linkagelens-maven-plugin</artifactId>
   <version>0.2.0-SNAPSHOT</version>
   <executions>

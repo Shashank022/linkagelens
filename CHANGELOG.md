@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.0-SNAPSHOT
+
+- Added Maven Guardian lifecycle integration.
+- Standardized Maven artifact coordinates on the product namespace `io.linkagelens` instead of a maintainer-specific namespace.
+
 ## 0.1.0
 
 - Initial LinkageLens CLI.
