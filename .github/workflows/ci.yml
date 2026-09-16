@@ -22,11 +22,12 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+          cache: maven
 
-      - name: Build and test
+      - name: Build and test LinkageLens CLI
         run: ./build.sh
 
-      - name: Smoke-test CLI and report formats
+      - name: Smoke-test CLI
         run: |
           java -jar dist/linkagelens.jar rules
           java -jar dist/linkagelens.jar scan dist/linkagelens.jar --format json --output /tmp/linkagelens.json
@@ -35,5 +36,14 @@ jobs:
           import json
           json.load(open('/tmp/linkagelens.json'))
           json.load(open('/tmp/linkagelens.sarif'))
-          print('JSON and SARIF validated')
+          print('CLI JSON and SARIF validated')
           PY
+
+      - name: Install LinkageLens Maven plugin
+        run: mvn -B -ntp -f maven-plugin/pom.xml install
+
+      - name: Install LinkageLens Maven extension
+        run: mvn -B -ntp -f maven-extension/pom.xml install
+
+      - name: Verify automatic Maven Guardian
+        run: ./scripts/test-maven-extension.sh
