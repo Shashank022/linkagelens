@@ -1,0 +1,9 @@
+build/
+dist/
+target/
+.idea/
+*.iml
+.DS_Store
+*.log
+*.sarif
+*.json

@@ -1,0 +1,34 @@
+name: Bug report
+description: Report incorrect LinkageLens behavior or a false positive/negative.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "For exploitable security issues, do not use this form. Follow SECURITY.md."
+  - type: input
+    id: version
+    attributes:
+      label: LinkageLens version/commit
+    validations:
+      required: true
+  - type: input
+    id: java
+    attributes:
+      label: Java version
+    validations:
+      required: true
+  - type: textarea
+    id: scenario
+    attributes:
+      label: Binary/dependency scenario
+      description: Describe the scanned artifact set and expected linkage behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Actual output
+      render: text
+    validations:
+      required: true
