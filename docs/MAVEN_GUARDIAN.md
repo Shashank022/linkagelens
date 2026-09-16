@@ -18,11 +18,19 @@ mvn verify
 
 The plugin exposes `linkagelens:check` and defaults to the Maven `verify` phase. The companion Maven core extension injects that execution automatically for every non-`pom` module.
 
+## Coordinates
+
+All Maven Guardian artifacts use the LinkageLens product namespace:
+
+```text
+io.linkagelens
+```
+
 ## Explicit plugin mode
 
 ```xml
 <plugin>
-  <groupId>io.github.shashank022</groupId>
+  <groupId>io.linkagelens</groupId>
   <artifactId>linkagelens-maven-plugin</artifactId>
   <version>0.2.0-SNAPSHOT</version>
   <executions>
@@ -41,7 +49,7 @@ Check this into the consuming repository at `.mvn/extensions.xml`:
 ```xml
 <extensions>
   <extension>
-    <groupId>io.github.shashank022</groupId>
+    <groupId>io.linkagelens</groupId>
     <artifactId>linkagelens-maven-extension</artifactId>
     <version>0.2.0-SNAPSHOT</version>
   </extension>
