@@ -10,7 +10,7 @@ import org.apache.maven.project.MavenProject;
 public final class LinkageLensLifecycleParticipant extends AbstractMavenLifecycleParticipant {
     private static final String GROUP_ID = "io.linkagelens";
     private static final String ARTIFACT_ID = "linkagelens-maven-plugin";
-    private static final String VERSION = "0.2.0-SNAPSHOT";
+    private static final String VERSION = "0.2.0";
 
     @Override public void afterProjectsRead(MavenSession session) throws MavenExecutionException {
         if (Boolean.parseBoolean(session.getUserProperties().getProperty("linkagelens.extension.disable", "false"))) return;

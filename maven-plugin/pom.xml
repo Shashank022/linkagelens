@@ -2,19 +2,67 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.linkagelens</groupId>
   <artifactId>linkagelens-maven-plugin</artifactId>
-  <version>0.2.0-SNAPSHOT</version>
+  <version>0.2.0</version>
   <packaging>maven-plugin</packaging>
   <name>LinkageLens Maven Plugin</name>
-  <description>Runs LinkageLens automatically during Maven verify.</description>
-  <properties><maven.compiler.release>17</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>
+  <description>Runs LinkageLens binary-linkage analysis automatically during Maven verify.</description>
+  <url>https://github.com/Shashank022/linkagelens</url>
+
+  <licenses>
+    <license><name>MIT License</name><url>https://opensource.org/licenses/MIT</url><distribution>repo</distribution></license>
+  </licenses>
+  <developers>
+    <developer>
+      <name>LinkageLens Contributors</name>
+      <organization>LinkageLens</organization>
+      <organizationUrl>https://github.com/Shashank022/linkagelens</organizationUrl>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:https://github.com/Shashank022/linkagelens.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/Shashank022/linkagelens.git</developerConnection>
+    <url>https://github.com/Shashank022/linkagelens</url>
+    <tag>HEAD</tag>
+  </scm>
+
+  <properties>
+    <maven.compiler.release>17</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
   <dependencies>
     <dependency><groupId>org.apache.maven</groupId><artifactId>maven-plugin-api</artifactId><version>3.9.11</version><scope>provided</scope></dependency>
     <dependency><groupId>org.apache.maven</groupId><artifactId>maven-core</artifactId><version>3.9.11</version><scope>provided</scope></dependency>
     <dependency><groupId>org.apache.maven.plugin-tools</groupId><artifactId>maven-plugin-annotations</artifactId><version>3.15.2</version><scope>provided</scope></dependency>
   </dependencies>
+
   <build><plugins>
     <plugin><groupId>org.codehaus.mojo</groupId><artifactId>build-helper-maven-plugin</artifactId><version>3.6.1</version><executions><execution><id>include-linkagelens-engine</id><phase>generate-sources</phase><goals><goal>add-source</goal></goals><configuration><sources><source>${project.basedir}/../src/main/java</source></sources></configuration></execution></executions></plugin>
     <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version></plugin>
     <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-plugin-plugin</artifactId><version>3.15.2</version><configuration><goalPrefix>linkagelens</goalPrefix></configuration></plugin>
   </plugins></build>
+
+  <profiles>
+    <profile>
+      <id>central-release</id>
+      <build><plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId><artifactId>maven-source-plugin</artifactId><version>3.3.1</version>
+          <executions><execution><id>attach-sources</id><goals><goal>jar-no-fork</goal></goals></execution></executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId><artifactId>maven-javadoc-plugin</artifactId><version>3.11.2</version>
+          <executions><execution><id>attach-javadocs</id><goals><goal>jar</goal></goals></execution></executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId><artifactId>maven-gpg-plugin</artifactId><version>3.2.8</version>
+          <executions><execution><id>sign-artifacts</id><phase>verify</phase><goals><goal>sign</goal></goals></execution></executions>
+        </plugin>
+        <plugin>
+          <groupId>org.sonatype.central</groupId><artifactId>central-publishing-maven-plugin</artifactId><version>0.11.0</version><extensions>true</extensions>
+          <configuration><publishingServerId>central</publishingServerId><autoPublish>true</autoPublish><waitUntil>published</waitUntil></configuration>
+        </plugin>
+      </plugins></build>
+    </profile>
+  </profiles>
 </project>
